@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
@@ -99,6 +99,15 @@ async function seedRevenue() {
   );
 
   return insertedRevenue;
+}
+
+async function dropAllTables() {
+  await sql`
+      DROP TABLE users
+      DROP TABLE invoices
+      DROP TABLE customers
+      DROP TABLE revenue
+    `;
 }
 
 export async function GET() {
